@@ -1,0 +1,105 @@
+---
+title: "jzeng21_OriginalHomeworkCode_02"
+format: html
+editor: visual
+linestretch: 1  #this removes the excessive spacing between my comments
+---
+
+-   *I'm not entirely sure how to insert a theme on a Quarto document but this is what I ended up doing for my Rmd and potentially it can be helpful in terms of the final assignment:*
+
+*"\[output:*
+
+*prettydoc::html_pretty:*
+
+*theme: cayman*
+
+*toc: true*
+
+*toc_depth: 2}"*
+
+-   *I think that we also need to insert an image of a monkey for the final version too but that can be done by using the insert function in the toolbar and then the figure/image to insert one.*
+
+## Question 1
+
+```{r}
+lambda <- 15 #I setted 15 as the mean calls here
+
+greater_eight <- ppois(8, lambda) #using ppois function 
+print(paste("P(X > 8) = ",greater_eight)) #printed the results, I used print paste because there is both a string and numerical value in the print so it needs to be able to take both types.
+```
+
+*I'm not entirely sure the proper method to answer this question (I think that both work) but I ended up using this expression which would prevent having to paste it again:*
+
+*"lambda \<- 15*
+
+*y \<- ppois(8, lambda, lower.tail = FALSE)*
+
+*y"*
+
+## Question 2
+
+```{r}
+no_calls <- ppois(0, lambda)
+print(paste("P(X = 0) = ", no_calls))
+```
+
+## Question 3
+
+```{r}
+three_calls <- ppois (3, lambda)
+print(paste("P(X = 3 = ", three_calls))
+```
+
+*Again the way that I went about it avoided the print paste expression but either works!*
+
+## Question 4
+
+```{r}
+library(ggplot2) # I used ggplot 2 for a better visual
+
+x_vals <- 0:30
+poisson_pmf <- dpois(x_vals, lambda) #by using dpois you are able to get the exact values of x_vals, ppois would have given the probabilties against another x value
+poisson_df <- data.frame(x = x_vals, probability = poisson_pmf)
+
+ggplot(poisson_df, aes(x = x, y = probability)) +
+  geom_bar(stat = "identity", fill = "steelblue", color = "black") + 
+  geom_point(color = "red", size = 3) +  
+  labs(title = "Poisson Probability Mass Function", x = "Number of Calls", y = "Probability") + #labs just means labels
+  theme_minimal() #just made the theme of the plot more clean 
+
+
+```
+
+## Question 5
+
+```{r}
+set.seed(123) # setting the seed is important because it basically functions as a limiter to the randomization. If you don't set the seed you will baisically get random numbers everytime
+tyear_calls <- rpois(10^4, lambda) 
+tyear_calls #just printing the results, it is a bit large
+```
+
+## Question 6
+
+```{r}
+hist(tyear_calls, breaks = 30, col = "blue", border = "black",
+     main = " Histogram of 2 year simulation",
+     xlab = "Number of calls", xlim = c(0, 30), probability = TRUE)
+```
+
+## Peer Commentary (From Carly)
+
+1.  What you learned from running their Original Homework Code that helped improve your own code.
+
+I saw that Jason actually printed the results in Question 5 after doing the set.seed and rpois functions. I think that this is a really good check to make sure the randomization of the data generated is accurately working. I am going to implement this too in my code! I also liked how you used ggplot2, I feel like your figure was clearer than mine so I'm going to try this for my final assignment too.
+
+2.  What you did in your own code that might help to improve theirs.
+
+I think reviewing the formatting instructions for the final assignment may be helpful. I included instructions above for how I went about formatting the theme in my assignment (although I think you need to have the prettydoc package installed first before rendering it.
+
+3.  What challenges, if any, you *both* faced in your code that could not be helped by comparison.
+
+Again, I feel like there isn't a crazy difference between the two different ways that we can go about answering question one but maybe we can talk with Sylvie or other classmates to see if she has any additional ideas?
+
+4.  Whether the annotation/commenting on your peer’s Original Homework Code is readable and interpretable to you, and if not then how it could be improved.
+
+Overall this looks great! I feel like it's super readable and I really like your histogram. One suggestion that I have is to potentially add more comments so that you can remember what you did in this assignment so that you're able to reproduce it in the future.
