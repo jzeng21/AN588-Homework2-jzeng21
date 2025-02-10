@@ -1,8 +1,12 @@
 ---
 title: "jzeng21_OriginalHomeworkCode_02"
-format: html
+format:
+  html:
+    theme: cayman
 editor: visual
 ---
+
+![](images/babytiti.png)
 
 ## Question 1
 
@@ -16,7 +20,7 @@ print(paste("P(X > 8) = ",greater_eight)) #printed the results, I used print pas
 ## Question 2
 
 ```{r}
-no_calls <- ppois(0, lambda)
+no_calls <- ppois(0, lambda) 
 print(paste("P(X = 0) = ", no_calls))
 ```
 
