@@ -1,0 +1,76 @@
+---
+title: "jzeng21_OriginalHomeworkCode_02"
+format:
+  html:
+    theme: cayman
+editor: visual
+---
+
+![](images/babytiti.png)
+
+## Question 1
+
+```{r}
+lambda <- 15 #I setted 15 as the mean calls here
+
+greater_eight <- ppois(8, lambda) #using ppois function 
+print(paste("P(X > 8) = ",greater_eight)) #printed the results, I used print paste because there is both a string and numerical value in the print so it needs to be able to take both types.
+```
+
+## Question 2
+
+```{r}
+no_calls <- ppois(0, lambda) 
+print(paste("P(X = 0) = ", no_calls))
+```
+
+## Question 3
+
+```{r}
+three_calls <- ppois (3, lambda)
+print(paste("P(X = 3 = ", three_calls))
+```
+
+## Question 4
+
+```{r}
+library(ggplot2) # I used ggplot 2 for a better visual
+
+x_vals <- 0:30
+poisson_pmf <- dpois(x_vals, lambda) #by using dpois you are able to get the exact values of x_vals, ppois would have given the probabilties against another x value
+poisson_df <- data.frame(x = x_vals, probability = poisson_pmf)
+
+ggplot(poisson_df, aes(x = x, y = probability)) +
+  geom_bar(stat = "identity", fill = "steelblue", color = "black") + 
+  geom_point(color = "red", size = 3) +  
+  labs(title = "Poisson Probability Mass Function", x = "Number of Calls", y = "Probability") + #labs just means labels
+  theme_minimal() #just made the theme of the plot more clean 
+
+
+```
+
+## Question 5
+
+```{r}
+set.seed(123) # setting the seed is important because it basically functions as a limiter to the randomization. If you don't set the seed you will baisically get random numbers everytime
+tyear_calls <- rpois(10^4, lambda) 
+tyear_calls #just printing the results, it is a bit large
+```
+
+## Question 6
+
+```{r}
+hist(tyear_calls, breaks = 30, col = "blue", border = "black",
+     main = " Histogram of 2 year simulation",
+     xlab = "Number of calls", xlim = c(0, 30), probability = TRUE) #Used hist function to create a simple hist graph
+```
+
+## Final Thoughts:
+
+1\) This is still new to me put I learned a lot from my peer comments and homework.
+
+2\) Some challenges I faced was how to set proper chart properties and making sure that very large codes looked readable.
+
+3\) One of my current biggest challenge right now is actually still working on how to make my homework look pretty and also I am having trouble working on integration of github. I am still trying to figure out on how to push proper peer comments and how to push seperate files in differentiating the final vs original homework code.
+
+4\) In homework 3 I am to perfect all my issues and I hope that I myself can see the change.
